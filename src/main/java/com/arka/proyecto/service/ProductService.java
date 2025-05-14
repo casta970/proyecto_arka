@@ -1,0 +1,51 @@
+package com.arka.proyecto.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.arka.proyecto.model.Product;
+import com.arka.proyecto.repository.ProductRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class ProductService {
+
+    private final ProductRepository productRepository;
+    
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+    
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+    
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
+    }
+    
+    public Product updateProduct(Long id, Product product) {
+        Optional<Product> productExist = productRepository.findById(id);
+        if(productExist.isPresent()) {
+            product.setId(id);
+            return productRepository.save(product);
+        } else {
+            return null;
+        }
+    }
+    
+    public boolean deleteProduct(Long id) {
+        Optional<Product> productExist = productRepository.findById(id);
+        if(productExist.isPresent()) {
+            productRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
