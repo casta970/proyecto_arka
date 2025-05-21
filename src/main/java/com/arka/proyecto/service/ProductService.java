@@ -48,4 +48,16 @@ public class ProductService {
         }
     }
 
+    public List<Product> getProductsByNameOrDescription(String text) {
+        return productRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(text, text);
+    }
+
+    public List<Product> getAllProductsOrderByNameAsc() {
+        return productRepository.findAllByOrderByNameAsc();
+    }
+
+    public List<Product> getProductsByPriceRange(double minPrice, double maxPrice) {
+        return productRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
 }
