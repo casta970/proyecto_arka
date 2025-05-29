@@ -53,11 +53,7 @@ public class User {
     private List<Order> orders;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "category")
-    public List<Product> products;
-
-    @JsonManagedReference
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Cart detail;
+    private Cart cart;
 
 }

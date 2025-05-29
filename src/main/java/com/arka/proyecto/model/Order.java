@@ -1,6 +1,9 @@
 package com.arka.proyecto.model;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,6 +31,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
 
     @JsonBackReference(value = "user-order")
     @ManyToOne

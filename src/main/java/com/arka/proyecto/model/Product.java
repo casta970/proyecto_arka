@@ -60,7 +60,7 @@ public class Product {
     )
     private List<Order> orders;
 
-    @JsonBackReference(value = "user-order")
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
