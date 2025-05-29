@@ -1,10 +1,19 @@
 package com.arka.proyecto.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -30,9 +39,6 @@ public class Product {
     @NotBlank(message = "La marca no puede estar vacía")
     private String brand;
 
-    @NotBlank(message = "La categoría no puede estar vacía")
-    private String category;
-
     @Min(value = 0, message = "El stock no puede ser menor a cero")
     @NotNull(message = "El stock no puede estar vacío")
     private int stock;
@@ -44,5 +50,19 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     @NotBlank(message = "La descripción no puede estar vacía")
     private String description;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name="order_has_products",
+            joinColumns = @JoinColumn(name="product_id"),
+            inverseJoinColumns = @JoinColumn(name="order_id")
+    )
+    private List<Order> orders;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
 
 }

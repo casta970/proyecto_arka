@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.arka.proyecto.model.Category;
 import com.arka.proyecto.model.Product;
 import com.arka.proyecto.repository.ProductRepository;
 
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
     
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -58,6 +60,14 @@ public class ProductService {
 
     public List<Product> getProductsByPriceRange(double minPrice, double maxPrice) {
         return productRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    public List<Product> getProductsByCategoryId(Long categoryId) {
+        Category category = categoryService.getCategoryById(categoryId);
+        if (category == null) {
+            return List.of();
+        }
+        return productRepository.findByCategory(category);
     }
 
 }
