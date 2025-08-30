@@ -10,7 +10,6 @@ public class Product {
     private String marca;
     private BigDecimal precioUnitario;
     private Integer stock;
-    private Supplier proveedor;
 
     // Constructores
     public Product() {}
@@ -49,7 +48,4 @@ public class Product {
     
     public Integer getStock() { return stock; }
     public void setStock(Integer stock) { this.stock = stock; }
-
-    public Supplier getProveedor() { return proveedor; }
-    public void setProveedor(Supplier proveedor) { this.proveedor = proveedor; }
 }
