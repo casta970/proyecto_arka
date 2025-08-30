@@ -39,9 +39,4 @@ public class BeanConfiguration {
     public CartUseCase cartUseCase(CartRepositoryPort cartRepository) {
         return new CartApplicationService(cartRepository);
     }
-
-    @Bean
-    public SupplierUseCase supplierUseCase(SupplierRepositoryPort supplierRepository) {
-        return new SupplierApplicationService(supplierRepository);
-    }
 }

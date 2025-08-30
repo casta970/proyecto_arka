@@ -31,10 +31,6 @@ public class ProductEntity {
     @Column
     private Integer stock;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proveedor_id")
-    private SupplierEntity proveedor;
-
     public ProductEntity() {}
 
     // Getters y Setters
